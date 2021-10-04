@@ -1,0 +1,27 @@
+#choropleth_map {
+	top:50px;
+	bottom: 50px; 
+	left: 300px;
+	right: 300px;
+}
+
+#scatterplot {
+	top:50px;
+	bottom: 50px; 
+	left: 200px;
+	right: 300px;
+}
+
+.pure-g {
+	margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.last-pure-g {
+	margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.vis-container{
+	width: 1500px;
+}

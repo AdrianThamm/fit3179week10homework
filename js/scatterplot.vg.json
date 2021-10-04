@@ -1,0 +1,109 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 1200,
+    "height": 700,
+    "title": "Does Happier Countries Have Higher Extend of Health Life Expectancy Contributing To Its Happiness Score?",
+    "data": {
+        "url":"data/happiness_2015.csv"
+    },
+    "encoding": {
+        "x": {
+            "field": "Health (Life Expectancy)",
+            "type": "quantitative",
+            "axis": {"tickCount": 10, "titleFontSize": 18}
+        },
+        "y": {
+            "field": "Happiness Score",
+            "type": "quantitative",
+            "axis": {"tickCount": 8, "titleFontSize": 18}
+        }
+    },
+    "layer": [
+        {
+            "selection": {
+                "region_highlight": {
+                    "type": "multi",
+                    "fields": ["Region"],
+                    "bind": "legend"
+                }
+            },
+            "mark": {"type":"circle", "size":100},
+            "encoding": {
+                "color": {
+                    "field": "Region",
+                    "type": "nominal",
+                    "scale": {
+                        "domain": [
+                            "Australia and New Zealand",
+                            "Central and Eastern Europe",
+                            "Eastern Asia",
+                            "Latin America and Caribbean",
+                            "Middle East and Northern Africa",
+                            "North America",
+                            "Southeastern Asia",
+                            "Southern Asia",
+                            "Sub-Saharan Africa",
+                            "Western Europe"
+                        ],
+                        "range": [
+                            "#1170aa",
+                            "#9467bd",
+                            "#ff7f00",
+                            "#a6cee3",
+                            "#f1ce63",
+                            "#a65628",
+                            "#57606c",
+                            "#b6992d",
+                            "#ff9d9a",
+                            "#17becf"
+                        ]
+                    },
+                    "legend":{
+                        "labelFontSize":16, 
+                        "symbolSize":200, 
+                        "titleFontSize":18, 
+                        "labelLimit":500
+                    }
+                },
+                "opacity": {
+                    "condition": {"selection": "region_highlight", "value": 0.6},
+                    "value": 0.2
+                },
+                "tooltip": [
+                    {"field": "Country", "type": "nominal", "format":{"fontSize":14}},
+                    {"field": "Happiness Score", "type": "quantitative"},
+                    {"field": "Health (Life Expectancy)", "type": "quantitative"}
+                ]
+            }
+        },
+        {
+            "mark": {
+                "type": "text",
+                "align": "right",
+                "baseline": "middle",
+                "dx": -12,
+                "fontSize": 11.5,
+                "fontStyle": "italic"
+            },
+            "encoding": {
+                "text": {"field": "Country", "type": "nominal"},
+                "color": {"value": "black"},
+                "opacity": {
+                    "condition": {
+                        "test": "datum['Country'] == 'Switzerland' || datum['Country'] == 'Togo'",
+                        "value": 1
+                    },
+                    "value": 0
+                },
+                "tooltip": [
+                    {"field": "Country", "type": "nominal", "format":{"fontSize":14}},
+                    {"field": "Happiness Score", "type": "quantitative"},
+                    {"field": "Health (Life Expectancy)", "type": "quantitative"}
+                ]
+            }
+        }
+    ],
+    "config":{
+        "title":{"font":"sans-serif","fontSize":24}
+    }
+}
